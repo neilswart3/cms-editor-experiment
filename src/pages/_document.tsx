@@ -6,32 +6,35 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
+import { ServerStyleSheets as MuiServerStyleSheets } from '@mui/styles'
+import { ServerStyleSheet as StyledServerStyleSheets } from 'styled-components'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
-    const sheet = new ServerStyleSheet()
+    const styledComponentSheet = new StyledServerStyleSheets()
+    const materialUiSheets = new MuiServerStyleSheets()
     const originalRenderPage = ctx.renderPage
 
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+            styledComponentSheet.collectStyles(
+              materialUiSheets.collect(<App {...props} />)
+            ),
         })
 
       const initialProps = await Document.getInitialProps(ctx)
       return {
         ...initialProps,
-        styles: (
-          <>
-            {initialProps.styles}
-            {sheet.getStyleElement()}
-          </>
-        ),
+        styles: [
+          styledComponentSheet.getStyleElement(),
+          materialUiSheets.getStyleElement(),
+          initialProps.styles,
+        ],
       }
     } finally {
-      sheet.seal()
+      styledComponentSheet.seal()
     }
   }
 
