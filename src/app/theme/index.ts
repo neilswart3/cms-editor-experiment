@@ -1,4 +1,4 @@
-import { Theme, createTheme } from '@mui/material/styles'
+import { Theme, createTheme } from '@material-ui/core'
 import colors from './colors'
 import typography from './typography'
 
@@ -7,14 +7,15 @@ const theme: Theme = createTheme({
     primary: {
       main: '#fb8c00',
     },
+    secondary: {
+      main: colors.white,
+    },
   },
   typography,
-  components: {
+  overrides: {
     MuiIconButton: {
-      styleOverrides: {
-        root: {
-          color: colors.white,
-        },
+      root: {
+        color: colors.white,
       },
     },
   },

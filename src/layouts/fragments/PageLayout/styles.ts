@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Paper } from '@mui/material'
+import { Paper } from '@material-ui/core'
 import { colors } from 'src/app'
 
 const PageLayout = styled(Paper)`

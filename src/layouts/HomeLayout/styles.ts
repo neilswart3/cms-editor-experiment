@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import NextImage from 'next/image'
 import { rgba } from 'polished'
 import { colors } from 'src/app'
 import { PageLayout } from '../fragments'

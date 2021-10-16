@@ -11,7 +11,7 @@ const PageLayout: React.FC<Props> = ({
   className = 'PageLayout',
 }) => {
   return (
-    <Styled.PageLayout className={className} elevation={8}>
+    <Styled.PageLayout square className={className} elevation={8}>
       {children}
     </Styled.PageLayout>
   )

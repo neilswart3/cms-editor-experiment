@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-document-import-in-page */
-import React from 'react'
 import Document, {
   Html,
   Head,
@@ -7,10 +6,8 @@ import Document, {
   NextScript,
   DocumentContext,
 } from 'next/document'
-import { ServerStyleSheets as MuiServerStyleSheets } from '@mui/styles'
+import { ServerStyleSheets as MuiServerStyleSheets } from '@material-ui/core/styles'
 import { ServerStyleSheet as StyledServerStyleSheets } from 'styled-components'
-import createEmotionServer from '@emotion/server/create-instance'
-import createCache from '@emotion/cache'
 
 class MyDocument extends Document {
   static async getInitialProps(ctx: DocumentContext) {
@@ -18,36 +15,22 @@ class MyDocument extends Document {
     const materialUiSheets = new MuiServerStyleSheets()
     const originalRenderPage = ctx.renderPage
 
-    const cache = createCache({ key: 'css' })
-    const { extractCriticalToChunks } = createEmotionServer(cache)
-
     try {
       ctx.renderPage = () =>
         originalRenderPage({
           enhanceApp: (App) => (props) =>
             styledComponentSheet.collectStyles(
-              materialUiSheets.collect(<App emotionCache={cache} {...props} />)
+              materialUiSheets.collect(<App {...props} />)
             ),
         })
 
       const initialProps = await Document.getInitialProps(ctx)
-      const emotionStyles = extractCriticalToChunks(initialProps.html)
-      const emotionStyleTags = emotionStyles.styles.map((style) => (
-        <style
-          data-emotion={`${style.key} ${style.ids.join(' ')}`}
-          key={style.key}
-          // eslint-disable-next-line react/no-danger
-          dangerouslySetInnerHTML={{ __html: style.css }}
-        />
-      ))
-
       return {
         ...initialProps,
         styles: [
-          ...emotionStyleTags,
           styledComponentSheet.getStyleElement(),
           materialUiSheets.getStyleElement(),
-          ...React.Children.toArray(initialProps.styles),
+          initialProps.styles,
         ],
       }
     } finally {

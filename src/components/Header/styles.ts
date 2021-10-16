@@ -1,18 +1,20 @@
 import styled from 'styled-components'
-import { AppBar, IconButton as MuiIconButton } from '@mui/material'
+import { AppBar, Fab as MuiFab } from '@material-ui/core'
 import { colors } from 'src/app'
 
 const Header = styled(AppBar)`
-  display: flex;
-  align-items: center;
-  flex-direction: row;
-  justify-content: space-between;
   padding: 2rem 3rem 1rem;
-  background-color: transparent;
 `
 
-const IconButton = styled(MuiIconButton)``
+const HeaderInner = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+`
 
-const Styled = { Header, IconButton }
+const Fab = styled(MuiFab)``
+
+const Styled = { Header, HeaderInner, Fab }
 
 export default Styled

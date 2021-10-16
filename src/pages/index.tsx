@@ -1,9 +1,6 @@
-import { useEffect, useState } from 'react'
 import type { NextPage } from 'next'
-import { Typography } from '@mui/material'
-import { usePalette } from 'color-thief-react'
+import { Typography } from '@material-ui/core'
 import { HomeLayout } from 'src/layouts'
-import { getImageUrl, getPalette } from 'src/app/lib'
 
 const backgrounds = [
   'eOcyhe5-9sQ',

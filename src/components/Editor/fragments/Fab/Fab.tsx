@@ -1,7 +1,7 @@
 import React from 'react'
 import { compose, Dispatch } from 'redux'
 import { connect } from 'react-redux'
-import { Close, Edit } from '@mui/icons-material'
+import { Close, Edit } from '@material-ui/icons'
 import { RootState } from 'src/store/reducers'
 import * as actions from 'src/store/actions/editor'
 import Styled from './styles'

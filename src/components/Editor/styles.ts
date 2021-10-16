@@ -1,7 +1,6 @@
 import styled from 'styled-components'
-import { Drawer } from '@mui/material'
+import { Drawer } from '@material-ui/core'
 import { motion } from 'framer-motion'
-import { purple } from '@mui/material/colors'
 
 const Editor = styled(motion.div)``
 
@@ -10,7 +9,7 @@ interface BackgroundProps {
 }
 
 const Background = styled(motion.div)<BackgroundProps>`
-  background-color: ${purple[500]};
+  background-color: red;
   height: 100vh;
 
   ${({ open }) => `

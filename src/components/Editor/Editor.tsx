@@ -1,7 +1,7 @@
 import React, { useRef } from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
-import { Drawer } from '@mui/material'
+import { Drawer } from '@material-ui/core'
 import { RootState } from 'src/store/reducers'
 import { Fab } from './fragments'
 import Styled from './styles'

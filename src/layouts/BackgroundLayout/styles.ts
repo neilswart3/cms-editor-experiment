@@ -1,4 +1,4 @@
-import { Paper } from '@mui/material'
+import { Paper } from '@material-ui/core'
 import { motion } from 'framer-motion'
 import { colors } from 'src/app'
 import { createLinearGradient } from 'src/app/lib'

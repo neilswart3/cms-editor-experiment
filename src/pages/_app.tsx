@@ -1,8 +1,7 @@
 import type { AppProps } from 'next/app'
-import { ThemeProvider } from '@mui/material/styles'
-import { CssBaseline } from '@mui/material'
-import { theme } from '../app'
 import { Provider } from 'react-redux'
+import { ThemeProvider, CssBaseline } from '@material-ui/core'
+import { theme } from '../app'
 import { store } from 'src/store'
 
 function MyApp({ Component, pageProps }: AppProps) {
