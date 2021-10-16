@@ -30,12 +30,13 @@
     "tinycolor2": "^1.4.2"
   },
   "devDependencies": {
+    "@babel/core": "^7.15.8",
     "@svgr/webpack": "^5.5.0",
     "@types/react": "17.0.30",
     "@types/styled-components": "^5.1.15",
     "@types/tinycolor2": "^1.4.3",
     "babel-plugin-styled-components": "^1.13.2",
-    "eslint": "8.0.1",
+    "eslint": "^8.0.1",
     "eslint-config-next": "11.1.2",
     "next-compose-plugins": "^2.2.1",
     "next-images": "^1.8.1",

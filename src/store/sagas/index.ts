@@ -1,10 +1,5 @@
-import { all, fork } from 'redux-saga/effects'
-// import { filmsWatcher } from './films'
-// import { genresWatcher } from './genres'
+import { all } from 'redux-saga/effects'
 
 export function* rootSaga() {
-  yield all([
-    // fork(genresWatcher),
-    // fork(filmsWatcher)
-  ])
+  yield all([])
 }
