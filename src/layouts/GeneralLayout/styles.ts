@@ -2,19 +2,19 @@ import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
 const GeneralLayout = styled.div`
-  background-color: #333;
+  /* background-color: #333;
   display: flex;
   min-height: 100vh;
-  perspective: 1500px;
+  perspective: 1500px; */
 `
 
 const PageContent = styled(motion.div)`
-  position: relative;
+  /* position: relative;
   min-height: 100vh;
   flex: 1;
   background-color: #fff;
   perspective: 40px;
-  transform-style: preserve-3d;
+  transform-style: preserve-3d; */
 `
 
 const Styled = { GeneralLayout, PageContent }

@@ -1,30 +1,46 @@
 import { Paper } from '@mui/material'
+import { motion } from 'framer-motion'
 import { colors } from 'src/app'
 import { createLinearGradient } from 'src/app/lib'
-import styled from 'styled-components'
+import styled, { keyframes } from 'styled-components'
 
-interface BackgroundLayoutProps {
-  palette: string[]
-}
-
-const BackgroundLayout = styled.div<BackgroundLayoutProps>`
+const BackgroundLayout = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   height: 100vh;
   padding: 5rem 3rem;
   position: relative;
+  overflow: hidden;
+`
 
-  &::before {
-    content: '';
-    ${({ palette }) => createLinearGradient({ palette, alpha: 1 })}
-    mix-blend-mode: exclusion;
-    width: 100%;
-    height: 100%;
-    position: absolute;
-    left: 0;
-    top: 0;
+interface BackgroundGradientProps {
+  palette: string[]
+}
+
+const backgroundAimation = keyframes`
+  0% { 
+    transform: scale(2) rotate(0)
   }
+
+  50% {
+    transform: scale(3, 2.25) rotate(180deg) 
+  }
+
+  100% {
+    transform: scale(2) rotate(360deg)
+  }
+`
+
+const BackgroundGradient = styled(motion.div)<BackgroundGradientProps>`
+  ${({ palette }) => createLinearGradient({ palette, alpha: 0.5 })}
+  background-blend-mode: hue;
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  animation: ${backgroundAimation} 60s ease-in-out infinite alternate;
 `
 
 const Content = styled(Paper)`
@@ -34,6 +50,6 @@ const Content = styled(Paper)`
   border-radius: 3.5rem;
 `
 
-const Styled = { BackgroundLayout, Content }
+const Styled = { BackgroundLayout, BackgroundGradient, Content }
 
 export default Styled

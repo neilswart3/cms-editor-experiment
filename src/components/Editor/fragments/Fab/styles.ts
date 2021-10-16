@@ -1,5 +1,5 @@
-import { Fab as MuiFab } from '@mui/material'
 import styled from 'styled-components'
+import { Fab as MuiFab } from '@mui/material'
 
 interface FabProps {
   open: boolean

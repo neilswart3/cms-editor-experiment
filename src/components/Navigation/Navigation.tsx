@@ -1,9 +1,7 @@
 import React from 'react'
 import Styled from './styles'
 
-interface Props {}
-
-const Navigation: React.FC<Props> = ({ open }: Props) => {
+const Navigation: React.FC = () => {
   return <Styled.Navigation>Navigation component</Styled.Navigation>
 }
 

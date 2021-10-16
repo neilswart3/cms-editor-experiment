@@ -1,4 +1,5 @@
-import getImagePalette from './getImagePalette'
+import getPalette from './getPalette'
 import createLinearGradient from './createLinearGradient'
+import getImageUrl from './getImageUrl'
 
-export { getImagePalette, createLinearGradient }
+export { getPalette, createLinearGradient, getImageUrl }

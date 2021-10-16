@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import NextImage from 'next/image'
 import { rgba } from 'polished'
 import { colors } from 'src/app'
 import { PageLayout } from '../fragments'
@@ -10,6 +11,12 @@ const HomeLayout = styled(PageLayout)`
 
 const Background = styled.div`
   z-index: 0;
+`
+
+const HeaderWrap = styled.div`
+  position: absolute;
+  top: 0;
+  width: 100%;
 `
 
 const ContentWrap = styled.div`
@@ -24,6 +31,8 @@ const Content = styled.div`
   position: absolute;
   padding: 6rem 3rem 4rem;
   z-index: 10;
+  width: 100%;
+  height: 100%;
 `
 
 const ContentBackdrop = styled.div`
@@ -32,27 +41,24 @@ const ContentBackdrop = styled.div`
   left: 0;
   height: 100%;
   width: 100%;
-  background-color: ${rgba(colors.white, 0.1)};
-  backdrop-filter: blur(15px);
+  background-color: ${rgba(colors.white, 0.4)};
+  backdrop-filter: blur(20px);
 `
 
-interface ImageProps {
-  image: string
-}
-
-const Image = styled.div<ImageProps>`
-  background: url(${({ image }) => image}) no-repeat center left/cover;
+const Image = styled.img`
   position: absolute;
   left: 50%;
   top: 50%;
   transform: translate(-50%, -50%);
   width: 102%;
   height: 102%;
+  object-fit: cover;
 `
 
 const Styled = {
   HomeLayout,
   Background,
+  HeaderWrap,
   Content,
   ContentWrap,
   ContentBackdrop,

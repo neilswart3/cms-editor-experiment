@@ -1,25 +1,18 @@
 import styled from 'styled-components'
-import {
-  IconButton as MuiIconButton,
-  Toolbar as MuiToolbar,
-} from '@mui/material'
+import { AppBar, IconButton as MuiIconButton } from '@mui/material'
 import { colors } from 'src/app'
 
-const Header = styled.div`
-  display: block;
-`
-
-const IconButton = styled(MuiIconButton)`
-  svg {
-    color: ${colors.white};
-  }
-`
-
-const Toolbar = styled(MuiToolbar)`
+const Header = styled(AppBar)`
   display: flex;
+  align-items: center;
+  flex-direction: row;
   justify-content: space-between;
+  padding: 2rem 3rem 1rem;
+  background-color: transparent;
 `
 
-const Styled = { Header, IconButton, Toolbar }
+const IconButton = styled(MuiIconButton)``
+
+const Styled = { Header, IconButton }
 
 export default Styled

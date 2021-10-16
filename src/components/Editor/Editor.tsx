@@ -37,9 +37,6 @@ const Editor: React.FC<Props> = ({ open }) => {
   return (
     <Styled.Editor initial={false} animate={open ? 'open' : 'closed'}>
       <Styled.Background open={open} variants={sidebar} />
-      {/* <Drawer open={open} variant='persistent'>
-        Drawer
-      </Drawer> */}
       <Fab />
     </Styled.Editor>
   )

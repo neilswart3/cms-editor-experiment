@@ -8,7 +8,8 @@ interface Props {
 
 const BackgroundLayout: React.FC<Props> = ({ children, palette }) => {
   return (
-    <Styled.BackgroundLayout palette={palette}>
+    <Styled.BackgroundLayout>
+      <Styled.BackgroundGradient palette={palette} />
       {children}
     </Styled.BackgroundLayout>
   )
