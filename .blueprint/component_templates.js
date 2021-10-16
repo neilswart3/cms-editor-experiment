@@ -11,7 +11,7 @@ interface Props {
     : ''
 }
 const ${name}: React.FC${props ? `<Props>` : ''} = (${
-  props ? `props: Props` : ''
+  props ? `props` : ''
 }) => {
   return (
     <Styled.${name}>${name} component</Styled.${name}>

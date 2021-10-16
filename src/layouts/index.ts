@@ -1,3 +1,5 @@
+import BackgroundLayout from './BackgroundLayout'
 import GeneralLayout from './GeneralLayout'
+import HomeLayout from './HomeLayout'
 
-export { GeneralLayout }
+export { BackgroundLayout, GeneralLayout, HomeLayout }
