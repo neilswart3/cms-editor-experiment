@@ -6,9 +6,9 @@ interface Props {
   children: React.ReactNode
 }
 
-const GeneralLayout: React.FC<Props> = ({ children }) => {
+const GeneralLayoutTest: React.FC<Props> = ({ children }) => {
   return (
-    <Styled.GeneralLayout>
+    <Styled.GeneralLayoutTest>
       <Styled.PageContent
         animate='active'
         variants={{
@@ -23,8 +23,8 @@ const GeneralLayout: React.FC<Props> = ({ children }) => {
       </Styled.PageContent>
       <Navigation />
       <Editor />
-    </Styled.GeneralLayout>
+    </Styled.GeneralLayoutTest>
   )
 }
 
-export default GeneralLayout
+export default GeneralLayoutTest

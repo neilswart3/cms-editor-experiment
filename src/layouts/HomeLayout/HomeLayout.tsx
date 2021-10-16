@@ -5,9 +5,9 @@ import { getImageUrl, getPalette } from 'src/app/lib'
 import { Header } from 'src/components'
 import { RootState } from 'src/store/reducers'
 import * as actions from 'src/store/actions/palette'
-import { BackgroundLayout } from '..'
 import Styled from './styles'
 import { connect } from 'react-redux'
+import { BackgroundLayout } from '..'
 
 interface ReduxStateProps {
   palette: string[]
