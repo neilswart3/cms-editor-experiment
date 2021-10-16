@@ -53,13 +53,13 @@ fs.readFile(`./src/${type}/index.ts`, 'utf8', function (err, data) {
 
   // create the import and export statements
   const importStatements = newComponents
-    .map(
-      (importName) =>
-        `export { default as ${importName} } from './${importName}'\n`
-    )
+    .map((importName) => `import ${importName} from './${importName}'\n`)
     .join('')
+  const exportStatements = `export {\n${newComponents
+    .map((component) => `  ${component},\n`)
+    .join('')}}\n`
 
-  const fileContent = `${importStatements}`
+  const fileContent = `${importStatements}\n${exportStatements}`
 
   fs.writeFile(`./src/${type}/index.ts`, fileContent, writeFileErrorHandler)
 
