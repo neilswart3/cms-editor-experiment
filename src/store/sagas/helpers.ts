@@ -5,6 +5,14 @@ export interface ResponseGenerator {
   request?: any
   status?: number
   statusText?: string
+  user?: any
+  error?: any
+}
+
+export const getReadableErrorMessage = (code: string): string => {
+  const message = code.replace(/auth\/|\(|\)/g, '').replace(/-/g, ' ')
+
+  return message
 }
 
 export const getErrorMessage = (error: Error): string => {

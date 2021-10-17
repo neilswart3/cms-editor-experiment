@@ -8,7 +8,9 @@ interface Props {
 
 const HomeLayout: React.FC<Props> = ({ background, children }) => {
   return (
-    <Styled.HomeLayout background={background}>{children}</Styled.HomeLayout>
+    <Styled.HomeLayout page='home' background={background}>
+      {children}
+    </Styled.HomeLayout>
   )
 }
 

@@ -3,8 +3,8 @@ import React, { useEffect } from 'react'
 import { compose, Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { getImageUrl, getPalette } from 'src/app/lib'
-import { BackgroundLayout, EditorLayout } from 'src/layouts'
-import { Editor, Header } from 'src/components'
+import { BackgroundLayout } from 'src/layouts'
+import { Header } from 'src/components'
 import { RootState } from 'src/store/reducers'
 import * as actions from 'src/store/actions/palette'
 import Styled from './styles'
@@ -20,6 +20,7 @@ interface ReduxDispatchProps {
 interface OwnProps {
   background: string
   children: React.ReactNode
+  page?: 'home' | 'auth' | 'page'
 }
 
 type Props = ReduxStateProps & ReduxDispatchProps & OwnProps
@@ -29,6 +30,7 @@ const GeneralLayout: React.FC<Props> = ({
   background,
   palette,
   setPalette,
+  page = 'page',
 }) => {
   const backgroundImage = getImageUrl({
     id: background,
@@ -51,7 +53,7 @@ const GeneralLayout: React.FC<Props> = ({
         <Styled.Background>
           <Styled.Image src={backgroundImage} />
         </Styled.Background>
-        <Styled.ContentWrap>
+        <Styled.ContentWrap page={page}>
           <Styled.ContentBackdrop />
           <Styled.Content>{children}</Styled.Content>
         </Styled.ContentWrap>

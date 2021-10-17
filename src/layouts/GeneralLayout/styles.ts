@@ -18,11 +18,21 @@ const HeaderWrap = styled.div`
   width: 100%;
 `
 
-const ContentWrap = styled.div`
+interface ContentWrapProps {
+  page: 'home' | 'page' | 'auth'
+}
+
+const contentWidth = {
+  home: '40%',
+  page: '60%',
+  auth: '50%',
+}
+
+const ContentWrap = styled.div<ContentWrapProps>`
   position: relative;
   height: 100%;
   z-index: 10;
-  width: 40%;
+  width: ${({ page }) => contentWidth[page]};
   z-index: 0;
 `
 

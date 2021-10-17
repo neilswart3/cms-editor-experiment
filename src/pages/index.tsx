@@ -1,17 +1,7 @@
 import type { NextPage } from 'next'
 import { Typography } from '@material-ui/core'
 import { HomeLayout } from 'src/layouts'
-
-const backgrounds = [
-  'eOcyhe5-9sQ',
-  'NAruOBAvyN0',
-  'iWMfiInivp4',
-  'T7K4aEPoGGk',
-  '2ueUnL4CkV8',
-  'zunQwMy5B6M',
-  'g_gwdpsCVAY',
-  'vk4vjTNVrTg',
-]
+import { backgrounds } from 'src/app/lib'
 
 const background = backgrounds[0]
 

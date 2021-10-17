@@ -1,11 +1,11 @@
 import { combineReducers } from 'redux'
 import { editorReducer } from './editor'
+import { authReducer } from './auth'
 import { navReducer } from './nav'
 import { paletteReducer } from './palette'
-// import { genresReducer } from './genres'
 
 const rootReducer = combineReducers({
-  // genres: genresReducer,
+  auth: authReducer,
   editor: editorReducer,
   nav: navReducer,
   palette: paletteReducer,

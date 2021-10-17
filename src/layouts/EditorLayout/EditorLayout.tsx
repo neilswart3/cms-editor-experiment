@@ -1,3 +1,4 @@
+import { useRouter } from 'next/dist/client/router'
 import React from 'react'
 import { Editor } from 'src/components'
 import Styled from './styles'
@@ -7,9 +8,12 @@ interface Props {
 }
 
 const EditorLayout: React.FC<Props> = ({ children }) => {
+  const { asPath } = useRouter()
+  const isAuth = asPath === '/auth'
+
   return (
     <Styled.EditorLayout>
-      <Editor />
+      {!isAuth && <Editor />}
       {children}
     </Styled.EditorLayout>
   )
