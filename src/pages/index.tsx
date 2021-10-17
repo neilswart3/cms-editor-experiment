@@ -8,6 +8,7 @@ import * as actions from 'src/store/actions/pages'
 import { connect } from 'react-redux'
 import { RootState } from 'src/store/reducers'
 import { useEffect, useState } from 'react'
+import { Alert, AlertTitle, Skeleton } from '@material-ui/lab'
 
 const background = backgrounds[0]
 
@@ -38,6 +39,29 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
 
   return (
     <HomeLayout background={background}>
+      {error && (
+        <Alert severity='error'>
+          <AlertTitle>Error</AlertTitle>
+          {error}
+        </Alert>
+      )}
+      {loading && (
+        <>
+          <Typography variant='h3' component='h1' gutterBottom>
+            <Skeleton
+              animation='wave'
+              height={10}
+              style={{ marginBottom: 6 }}
+            />
+          </Typography>
+          <Typography variant='body1'>
+            <Skeleton animation='wave' height={40} width='80%' />
+            <Skeleton animation='wave' height={15} width='80%' />
+            <Skeleton animation='wave' height={15} width='80%' />
+            <Skeleton animation='wave' height={15} width='80%' />
+          </Typography>
+        </>
+      )}
       {sections.title && (
         <Typography variant='h3' component='h1' gutterBottom>
           {sections.title.content}

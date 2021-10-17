@@ -1,20 +1,16 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects'
 import { getPages } from 'src/app/api'
-import { pagesFailure, pagesSuccess } from '../actions/pages'
-import { pagesTypes } from '../actions/pages/types'
+import { pagesFailure, pagesSuccess } from '../../actions/pages'
+import { pagesTypes } from '../../actions/pages/types'
 import {
   getErrorMessage,
   getReadableErrorMessage,
   ResponseGenerator,
-} from './helpers'
+} from '../helpers'
 
 function* fetchPages() {
-  // const { form, email, password } = payload
-  // payload
   try {
     const data: ResponseGenerator = yield call(getPages)
-
-    // console.log('data:', data)
 
     if (data.pages) {
       yield put(pagesSuccess({ data: data.pages }))

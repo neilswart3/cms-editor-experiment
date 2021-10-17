@@ -3,19 +3,19 @@ import { connect } from 'react-redux'
 import { compose } from 'redux'
 import { ThemeProvider } from '@material-ui/core'
 import { darkTheme } from 'src/app'
-import { TextField } from 'src/common'
 import { RootState } from 'src/store/reducers'
 import { editor, sidebar } from './animations'
-import { EditorForm, EditorHeader, Fab } from './fragments'
+import { AuthFab, EditorForm, EditorHeader, Fab } from './fragments'
 import Styled from './styles'
 
 interface ReduxStateProps {
   open: boolean
+  isSignedIn: boolean
 }
 
 type Props = ReduxStateProps
 
-const Editor: React.FC<Props> = ({ open }) => {
+const Editor: React.FC<Props> = ({ open, isSignedIn }) => {
   return (
     <>
       <Styled.Editor
@@ -32,13 +32,15 @@ const Editor: React.FC<Props> = ({ open }) => {
           </ThemeProvider>
         </Styled.Background>
       </Styled.Editor>
-      <Fab />
+      {isSignedIn && <Fab />}
+      <AuthFab />
     </>
   )
 }
 
-const mapStateToProps = ({ editor }: RootState): ReduxStateProps => ({
+const mapStateToProps = ({ editor, auth }: RootState): ReduxStateProps => ({
   open: editor.open,
+  isSignedIn: !!auth.data.accessToken,
 })
 
 export default compose<React.ElementType>(connect(mapStateToProps))(Editor)
