@@ -7,6 +7,7 @@ export interface ResponseGenerator {
   statusText?: string
   user?: any
   error?: any
+  pages?: any
 }
 
 export const getReadableErrorMessage = (code: string): string => {

@@ -19,27 +19,15 @@ const firebaseConfig = {
   appId: '1:364522847776:web:765bb1112019ced28bc645',
 }
 
-let rsf
-let firestore
-let auth
-
 const app = initializeApp(firebaseConfig)
-rsf = new ReduxSagaFirebase(app)
-firestore = getFirestore(app)
-auth = getAuth(app)
-
-// onAuthStateChanged(auth, (user) => {
-//   if (user !== null) {
-//     console.log('user:', user)
-//   } else {
-//     console.log('user:', user)
-//   }
-// })
+const rsf = new ReduxSagaFirebase(app)
+const db = getFirestore(app)
+const auth = getAuth(app)
 
 const firebase = {
   rsf,
   auth,
-  firestore,
+  db,
 }
 
 export default firebase

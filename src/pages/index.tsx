@@ -2,30 +2,79 @@ import type { NextPage } from 'next'
 import { Typography } from '@material-ui/core'
 import { HomeLayout } from 'src/layouts'
 import { backgrounds } from 'src/app/lib'
+import { compose, Dispatch } from 'redux'
+import { Page, Pages } from 'src/store/actions/pages/types'
+import * as actions from 'src/store/actions/pages'
+import { connect } from 'react-redux'
+import { RootState } from 'src/store/reducers'
+import { useEffect, useState } from 'react'
 
 const background = backgrounds[0]
 
-const Home: NextPage = () => {
+interface ReduxStateProps {
+  data: Pages
+  loading: boolean
+  error: string | null
+}
+
+interface ReduxDispatchProps {
+  getPages: () => void
+}
+
+type Props = ReduxStateProps & ReduxDispatchProps
+
+const typoConfig = {
+  title: {
+    variant: 'h3',
+    component: 'h1',
+    gutterBottom: true,
+  },
+  content: {
+    variant: 'body1',
+    component: 'p',
+    gutterBottom: false,
+  },
+}
+
+const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
+  const [sections, setSections] = useState<Page>({})
+
+  useEffect(() => {
+    if (Object.values(data).length === 0) {
+      getPages()
+    }
+
+    if (Object.keys(data).length > 0 && data.landing) {
+      setSections(data.landing)
+    }
+  }, [data])
+
+  console.log('data:', data)
+  console.log('loading:', loading)
+  console.log('sections:', sections)
+
   return (
     <HomeLayout background={background}>
-      <Typography variant='h3' component='h1' gutterBottom>
-        fsdaf asdf sadfsadf sdaf
-      </Typography>
-      <Typography variant='body1'>
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas id leo
-        aliquam, mollis nunc vel, vulputate nulla. Duis tellus ante, lacinia
-        quis orci a, laoreet vehicula orci. Quisque posuere sapien sed fermentum
-        efficitur. In gravida rhoncus sapien a feugiat. Donec viverra lacinia
-        efficitur. Ut et neque vitae orci malesuada vulputate. Nulla facilisi.
-        Morbi finibus justo a urna laoreet, sit amet ullamcorper risus
-        fringilla. Sed ut lorem non ex bibendum sodales ac id orci. Aenean
-        efficitur molestie pharetra. Sed eu sem eget augue vehicula aliquam a
-        eget purus. Ut molestie porttitor auctor. Cras sed mi maximus, venenatis
-        sem ut, suscipit lectus. Mauris egestas felis id neque dignissim
-        fermentum.
-      </Typography>
+      {sections.title && (
+        <Typography variant='h3' component='h1' gutterBottom>
+          {sections.title.content}
+        </Typography>
+      )}
+      {sections.content && (
+        <Typography variant='body1'>{sections.content.content}</Typography>
+      )}
     </HomeLayout>
   )
 }
 
-export default Home
+const mapStateToProps = ({ pages }: RootState): ReduxStateProps => ({
+  data: pages.data,
+  loading: pages.loading,
+  error: pages.error,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
+  getPages: () => dispatch(actions.pagesRequest()),
+})
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Home)
