@@ -9,7 +9,9 @@ const [props] = process.argv.slice(5)
 
 if (!name) throw new Error('You must include a component name.')
 
-const dir = `./src/${type}${relPath !== '.' ? `/${relPath}` : ''}/${name}/`
+const fragments = relPath !== '.' ? `/${relPath}/fragments` : ''
+
+const dir = `./src/${type}${fragments}/${name}/`
 
 // throw an error if the file already exists
 if (fs.existsSync(dir))
@@ -38,10 +40,8 @@ fs.writeFile(`${dir}/styles.ts`, styles(name), writeFileErrorHandler)
 fs.writeFile(`${dir}/index.ts`, barrel(name), writeFileErrorHandler)
 
 // insert new component into 'components/index.ts file
-fs.readFile(`./src/${type}/index.ts`, 'utf8', function (err, data) {
+fs.readFile(`./src/${type}${fragments}/index.ts`, 'utf8', function (err, data) {
   if (err) throw err
-
-  if (relPath !== '.') return
 
   // grab all components and combine them with new component
   const currentComponents = data.match(/(?<=import )(.*?)(?= from)/g) || null
@@ -61,7 +61,11 @@ fs.readFile(`./src/${type}/index.ts`, 'utf8', function (err, data) {
 
   const fileContent = `${importStatements}\n${exportStatements}`
 
-  fs.writeFile(`./src/${type}/index.ts`, fileContent, writeFileErrorHandler)
+  fs.writeFile(
+    `./src/${type}${fragments}/index.ts`,
+    fileContent,
+    writeFileErrorHandler
+  )
 
   console.log(`${name} has been created.`)
 })

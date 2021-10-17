@@ -13,7 +13,12 @@ const Editor = styled(motion.div)`
 `
 
 const EditorContent = styled.div`
+  display: grid;
+  grid-template-columns: 1fr;
+  align-content: start;
+  grid-gap: 2rem;
   height: 100%;
+  padding: 1rem 0;
 `
 
 const Background = styled(motion.div)<EditorProps>`

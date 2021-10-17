@@ -1,9 +1,12 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { compose } from 'redux'
+import { ThemeProvider } from '@material-ui/core'
+import { darkTheme } from 'src/app'
+import { TextField } from 'src/common'
 import { RootState } from 'src/store/reducers'
 import { editor, sidebar } from './animations'
-import { Fab } from './fragments'
+import { EditorForm, EditorHeader, Fab } from './fragments'
 import Styled from './styles'
 
 interface ReduxStateProps {
@@ -21,7 +24,12 @@ const Editor: React.FC<Props> = ({ open }) => {
         variants={editor}
       >
         <Styled.Background open={open} variants={sidebar}>
-          <Styled.EditorContent>Editor content</Styled.EditorContent>
+          <ThemeProvider theme={(theme) => darkTheme(theme)}>
+            <Styled.EditorContent>
+              <EditorHeader />
+              <EditorForm />
+            </Styled.EditorContent>
+          </ThemeProvider>
         </Styled.Background>
       </Styled.Editor>
       <Fab />

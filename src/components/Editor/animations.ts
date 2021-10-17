@@ -17,7 +17,7 @@ export const editor = {
 
 export const sidebar = {
   open: {
-    clipPath: `circle(100vh at ${circlePos})`,
+    clipPath: `circle(120vh at ${circlePos})`,
     transition: {
       type: 'spring',
       stiffness: 80,
