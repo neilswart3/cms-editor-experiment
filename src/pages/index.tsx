@@ -23,19 +23,6 @@ interface ReduxDispatchProps {
 
 type Props = ReduxStateProps & ReduxDispatchProps
 
-const typoConfig = {
-  title: {
-    variant: 'h3',
-    component: 'h1',
-    gutterBottom: true,
-  },
-  content: {
-    variant: 'body1',
-    component: 'p',
-    gutterBottom: false,
-  },
-}
-
 const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
   const [sections, setSections] = useState<Page>({})
 
@@ -48,10 +35,6 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
       setSections(data.landing)
     }
   }, [data])
-
-  console.log('data:', data)
-  console.log('loading:', loading)
-  console.log('sections:', sections)
 
   return (
     <HomeLayout background={background}>
