@@ -1,15 +1,12 @@
 import React from 'react'
-import { Typography } from '@material-ui/core'
 import Styled from './styles'
 
-interface Props {}
-
-const EditorHeader: React.FC<Props> = (props) => {
+const EditorHeader: React.FC = () => {
   return (
     <Styled.EditorHeader>
-      <Typography align='center' variant='h4' color='textPrimary'>
+      <Styled.Text align='center' variant='h4' color='textSecondary'>
         Landing Page
-      </Typography>
+      </Styled.Text>
     </Styled.EditorHeader>
   )
 }

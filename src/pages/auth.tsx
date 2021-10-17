@@ -5,7 +5,7 @@ import { GeneralLayout } from 'src/layouts'
 
 const AuthPage: NextPage = () => {
   return (
-    <GeneralLayout page='auth' background={backgrounds[1]}>
+    <GeneralLayout page='auth' background={backgrounds[1].src}>
       <Auth />
     </GeneralLayout>
   )

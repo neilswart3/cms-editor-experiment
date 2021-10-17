@@ -18,21 +18,25 @@ type Props = ReduxStateProps
 const Editor: React.FC<Props> = ({ open, isSignedIn }) => {
   return (
     <>
-      <Styled.Editor
-        initial='closed'
-        animate={open ? 'open' : 'closed'}
-        variants={editor}
-      >
-        <Styled.Background open={open} variants={sidebar}>
-          <ThemeProvider theme={(theme) => darkTheme(theme)}>
-            <Styled.EditorContent>
-              <EditorHeader />
-              <EditorForm />
-            </Styled.EditorContent>
-          </ThemeProvider>
-        </Styled.Background>
-      </Styled.Editor>
-      {isSignedIn && <Fab />}
+      {isSignedIn && (
+        <>
+          <Styled.Editor
+            initial='closed'
+            animate={open ? 'open' : 'closed'}
+            variants={editor}
+          >
+            <Styled.Background open={open} variants={sidebar}>
+              <ThemeProvider theme={(theme) => darkTheme(theme)}>
+                <Styled.EditorContent>
+                  <EditorHeader />
+                  <EditorForm />
+                </Styled.EditorContent>
+              </ThemeProvider>
+            </Styled.Background>
+          </Styled.Editor>
+          <Fab />
+        </>
+      )}
       <AuthFab />
     </>
   )
