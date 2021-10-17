@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react'
 import { connect } from 'react-redux'
 import { compose, Dispatch } from 'redux'
-import { Button } from '@material-ui/core'
+import { Button, MenuItem, Select } from '@material-ui/core'
 import { Save } from '@material-ui/icons'
 import { Page } from 'src/store/actions/pages/types'
-import * as actions from 'src/store/actions/pages'
+import * as pagesActions from 'src/store/actions/pages'
+import * as imageActions from 'src/store/actions/image'
 import { RootState } from 'src/store/reducers'
 import { TextField } from 'src/common'
 import Styled from './styles'
+import { backgrounds } from 'src/app/lib'
 
 const initValues = {
   title: '',
@@ -18,12 +20,18 @@ const initErrors = {
   ...initValues,
 }
 
+type Image = {
+  src: string
+  name: string
+}
+
 interface ReduxStateProps {
   page: Page
 }
 
 interface ReduxDispatchProps {
   updatePage: (data: { page: string; values: Page }) => void
+  updateImage: (image: Image) => void
 }
 
 type Props = ReduxStateProps & ReduxDispatchProps
@@ -34,8 +42,9 @@ type Values = {
 
 type Errors = Values
 
-const EditorForm: React.FC<Props> = ({ page, updatePage }) => {
+const EditorForm: React.FC<Props> = ({ page, updatePage, updateImage }) => {
   const [values, setValues] = useState<Values>(initValues)
+  const [image, setImage] = useState<Image>({ ...backgrounds[0] })
   const [errors, setErrors] = useState<Errors>(initErrors)
 
   const handleSubmit = (e: any): void => {
@@ -51,6 +60,15 @@ const EditorForm: React.FC<Props> = ({ page, updatePage }) => {
       ...prev,
       [name]: value,
     }))
+  }
+
+  const handleImageChange = (e: any) => {
+    const { value } = e.target
+
+    const [filteredImg] = backgrounds.filter((img) => value === img.src)
+
+    setImage(filteredImg)
+    updateImage(filteredImg)
   }
 
   useEffect(() => {
@@ -74,6 +92,22 @@ const EditorForm: React.FC<Props> = ({ page, updatePage }) => {
         onChange={handleChange}
         multiline
       />
+      <Select
+        variant='outlined'
+        defaultValue={image.src}
+        value={image.src}
+        onChange={handleImageChange}
+      >
+        {backgrounds.map((img) => {
+          console.log('img:', img)
+
+          return (
+            <MenuItem value={img.src} key={img.src}>
+              {img.name}
+            </MenuItem>
+          )
+        })}
+      </Select>
       <Button
         type='submit'
         variant='contained'
@@ -92,7 +126,9 @@ const mapStateToProps = ({ pages }: RootState): ReduxStateProps => ({
 
 const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
   updatePage: ({ page, values }) =>
-    dispatch(actions.pagesUpdateRequest({ page, values })),
+    dispatch(pagesActions.pagesUpdateRequest({ page, values })),
+  updateImage: ({ src, name }) =>
+    dispatch(imageActions.setImage({ src, name })),
 })
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(EditorForm)

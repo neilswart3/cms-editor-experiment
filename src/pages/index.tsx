@@ -1,7 +1,6 @@
 import type { NextPage } from 'next'
 import { Typography } from '@material-ui/core'
 import { HomeLayout } from 'src/layouts'
-import { backgrounds } from 'src/app/lib'
 import { compose, Dispatch } from 'redux'
 import { Page, Pages } from 'src/store/actions/pages/types'
 import * as actions from 'src/store/actions/pages'
@@ -10,12 +9,11 @@ import { RootState } from 'src/store/reducers'
 import { useEffect, useState } from 'react'
 import { Alert, AlertTitle, Skeleton } from '@material-ui/lab'
 
-const background = backgrounds[0]
-
 interface ReduxStateProps {
   data: Pages
   loading: boolean
   error: string | null
+  image: string
 }
 
 interface ReduxDispatchProps {
@@ -24,7 +22,7 @@ interface ReduxDispatchProps {
 
 type Props = ReduxStateProps & ReduxDispatchProps
 
-const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
+const Home: NextPage<Props> = ({ data, loading, error, getPages, image }) => {
   const [sections, setSections] = useState<Page>({})
 
   useEffect(() => {
@@ -38,7 +36,7 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
   }, [data])
 
   return (
-    <HomeLayout background={background}>
+    <HomeLayout background={image}>
       {error && (
         <Alert severity='error'>
           <AlertTitle>Error</AlertTitle>
@@ -77,10 +75,11 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
   )
 }
 
-const mapStateToProps = ({ pages }: RootState): ReduxStateProps => ({
+const mapStateToProps = ({ pages, image }: RootState): ReduxStateProps => ({
   data: pages.data,
   loading: pages.loading,
   error: pages.error,
+  image: image.src,
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
