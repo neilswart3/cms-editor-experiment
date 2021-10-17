@@ -45,7 +45,7 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
           {error}
         </Alert>
       )}
-      {loading && (
+      {loading ? (
         <>
           <Typography variant='h3' component='h1' gutterBottom>
             <Skeleton
@@ -61,14 +61,17 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages }) => {
             <Skeleton animation='wave' height={15} width='80%' />
           </Typography>
         </>
-      )}
-      {sections.title && (
-        <Typography variant='h3' component='h1' gutterBottom>
-          {sections.title.content}
-        </Typography>
-      )}
-      {sections.content && (
-        <Typography variant='body1'>{sections.content.content}</Typography>
+      ) : (
+        <>
+          {sections.title && (
+            <Typography variant='h3' component='h1' gutterBottom>
+              {sections.title}
+            </Typography>
+          )}
+          {sections.content && (
+            <Typography variant='body1'>{sections.content}</Typography>
+          )}
+        </>
       )}
     </HomeLayout>
   )

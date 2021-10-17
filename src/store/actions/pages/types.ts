@@ -1,10 +1,6 @@
-export type Field = {
-  uid: string
-  content: string
-}
 export type Page = {
-  title?: Field
-  content?: Field
+  title?: string
+  content?: string
 }
 
 export type Pages = {
@@ -15,6 +11,9 @@ export enum pagesTypes {
   PAGES_REQUEST = 'PAGES_REQUEST',
   PAGES_SUCCESS = 'PAGES_SUCCESS',
   PAGES_FAILURE = 'PAGES_FAILURE',
+  PAGES_UPDATE_REQUEST = 'PAGES_UPDATE_REQUEST',
+  PAGES_UPDATE_SUCCESS = 'PAGES_UPDATE_SUCCESS',
+  PAGES_UPDATE_FAILURE = 'PAGES_UPDATE_FAILURE',
 }
 
 export interface PagesState {
@@ -45,4 +44,38 @@ export type PagesFailure = {
   payload: PagesFailurePayload
 }
 
-export type PagesActions = PagesRequest | PagesSuccess | PagesFailure
+export interface PagesUpdateRequestPayload {
+  page: string
+  values: Page
+}
+
+export interface PagesUpdateSuccessPayload {
+  data: Pages
+}
+
+export interface PagesUpdateFailurePayload {
+  error: string
+}
+
+export type PagesUpdateRequest = {
+  type: typeof pagesTypes.PAGES_UPDATE_REQUEST
+  payload: PagesUpdateRequestPayload
+}
+
+export type PagesUpdateSuccess = {
+  type: typeof pagesTypes.PAGES_UPDATE_SUCCESS
+  payload: PagesUpdateSuccessPayload
+}
+
+export type PagesUpdateFailure = {
+  type: typeof pagesTypes.PAGES_UPDATE_FAILURE
+  payload: PagesUpdateFailurePayload
+}
+
+export type PagesActions =
+  | PagesRequest
+  | PagesSuccess
+  | PagesFailure
+  | PagesUpdateRequest
+  | PagesUpdateSuccess
+  | PagesUpdateFailure
