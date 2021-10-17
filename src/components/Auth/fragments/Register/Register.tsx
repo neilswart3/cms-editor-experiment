@@ -1,7 +1,7 @@
-import { Button, CircularProgress, Typography } from '@material-ui/core'
 import React, { useEffect, useState } from 'react'
 import { compose, Dispatch } from 'redux'
 import { connect } from 'react-redux'
+import { Button, CircularProgress, Typography } from '@material-ui/core'
 import { User } from 'src/store/actions/auth/types'
 import * as actions from 'src/store/actions/auth'
 import { TextField } from 'src/common'
@@ -28,19 +28,12 @@ const initValues = {
   password: '',
 }
 
-const initErrors = {
-  ...initValues,
-}
-
 type Values = {
   [key in keyof typeof initValues]: string
 }
 
-type Errors = Values
-
 const Register: React.FC<Props> = ({ signUp, user, loading, error }) => {
   const [values, setValues] = useState<Values>(initValues)
-  const [errors, setErrors] = useState<Errors>(initErrors)
   const router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
@@ -63,7 +56,7 @@ const Register: React.FC<Props> = ({ signUp, user, loading, error }) => {
   }
 
   useEffect(() => {
-    if (user.email) {
+    if (!!user.accessToken) {
       router.push('/')
     }
   }, [user])
@@ -115,7 +108,8 @@ const mapStateToProps = ({ auth }: RootState): ReduxStateProps => ({
 })
 
 const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
-  signUp: (data) => dispatch(actions.authRequest(data)),
+  signUp: (data) =>
+    dispatch(actions.authRequest({ ...data, form: 'register' })),
 })
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Register)

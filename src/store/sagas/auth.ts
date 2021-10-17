@@ -1,5 +1,5 @@
 import { takeLatest, call, put, all } from 'redux-saga/effects'
-import { createUser } from 'src/app/api'
+import { createUser, signInUser } from 'src/app/api'
 import { authFailure, authSuccess } from '../actions/auth'
 import { authTypes } from '../actions/auth/types'
 import {
@@ -9,10 +9,17 @@ import {
 } from './helpers'
 
 function* loginSaga({ payload }: any) {
-  console.log('payload:', payload)
+  const { form, email, password } = payload
+  const isLogin = form === 'login'
 
   try {
-    const data: ResponseGenerator = yield call(createUser, payload)
+    const data: ResponseGenerator = yield call(
+      isLogin ? signInUser : createUser,
+      {
+        email,
+        password,
+      }
+    )
 
     if (data.user) {
       const { accessToken, email, uid } = data.user
@@ -26,10 +33,16 @@ function* loginSaga({ payload }: any) {
           },
         })
       )
+
+      window.localStorage.setItem(
+        'tbcmsAC',
+        JSON.stringify({ accessToken, email, uid })
+      )
     }
 
     if (data.error) {
       const message = getReadableErrorMessage(data.error)
+
       yield put(authFailure({ error: message }))
     }
   } catch (error) {

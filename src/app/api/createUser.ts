@@ -11,7 +11,6 @@ const createUser = async ({ email, password }: AuthRequestPayload) => {
     })
     .catch((error) => {
       const errorCode = error.code
-      const errorMessage = error.message
 
       return { error: errorCode }
     })

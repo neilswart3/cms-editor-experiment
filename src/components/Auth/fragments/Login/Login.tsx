@@ -1,27 +1,40 @@
-import { Button, Typography } from '@material-ui/core'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
+import { Button, CircularProgress, Typography } from '@material-ui/core'
+import { Alert, AlertTitle } from '@material-ui/lab'
+import Case from 'case'
 import { TextField } from 'src/common'
+import { User } from 'src/store/actions/auth/types'
+import * as actions from 'src/store/actions/auth'
 import Styled from './styles'
+import { RootState } from 'src/store/reducers'
+import { compose, Dispatch } from 'redux'
+import { connect } from 'react-redux'
+import { useRouter } from 'next/dist/client/router'
 
-interface Props {}
+interface ReduxStateProps {
+  user: User
+  loading: boolean
+  error: string | null
+}
+
+interface ReduxDispatchProps {
+  signIn: (data: any) => void
+}
+
+type Props = ReduxStateProps & ReduxDispatchProps
+
 const initValues = {
   email: '',
   password: '',
-}
-
-const initErrors = {
-  ...initValues,
 }
 
 type Values = {
   [key in keyof typeof initValues]: string
 }
 
-type Errors = Values
-
-const Login: React.FC<Props> = (props) => {
+const Login: React.FC<Props> = ({ signIn, user, loading, error }) => {
   const [values, setValues] = useState<Values>(initValues)
-  const [errors, setErrors] = useState<Errors>(initErrors)
+  const router = useRouter()
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
     const { name, value } = e.target
@@ -34,12 +47,24 @@ const Login: React.FC<Props> = (props) => {
 
   const handleSubmit = (e: any): void => {
     e.preventDefault()
+
+    signIn(values)
+
+    if (!error) {
+      setValues(initValues)
+    }
   }
+
+  useEffect(() => {
+    if (!!user.accessToken) {
+      router.push('/')
+    }
+  }, [user])
 
   return (
     <Styled.Login onSubmit={handleSubmit}>
       <Typography align='center' gutterBottom variant='h4'>
-        Sign up to edit content
+        Log in to edit content
       </Typography>
       <TextField
         label='Email'
@@ -55,11 +80,34 @@ const Login: React.FC<Props> = (props) => {
         value={values.password}
         onChange={handleChange}
       />
-      <Button type='submit' variant='contained' size='large' color='primary'>
-        Submit
+      <Button
+        disabled={loading}
+        type='submit'
+        variant='contained'
+        size='large'
+        color='primary'
+      >
+        {loading ? <CircularProgress size={26} /> : 'Submit'}
       </Button>
+
+      {error && (
+        <Alert severity='error'>
+          <AlertTitle>Error</AlertTitle>
+          {Case.capital(error)}
+        </Alert>
+      )}
     </Styled.Login>
   )
 }
 
-export default Login
+const mapStateToProps = ({ auth }: RootState): ReduxStateProps => ({
+  user: auth.data,
+  loading: auth.loading,
+  error: auth.error,
+})
+
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
+  signIn: (data) => dispatch(actions.authRequest({ ...data, form: 'login' })),
+})
+
+export default compose(connect(mapStateToProps, mapDispatchToProps))(Login)
