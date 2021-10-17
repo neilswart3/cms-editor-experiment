@@ -3,6 +3,7 @@ import Styled from './styles'
 
 interface Props {
   label: string
+  name: string
   value: string
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void
   multiline?: boolean
@@ -10,11 +11,19 @@ interface Props {
 }
 
 const TextField: React.FC<Props> = (props) => {
-  const { label, value, onChange, multiline = false, type = 'text' } = props
+  const {
+    label,
+    name,
+    value,
+    onChange,
+    multiline = false,
+    type = 'text',
+  } = props
 
   return (
     <Styled.TextField
       label={label}
+      name={name}
       value={value}
       onChange={onChange}
       multiline={multiline}
@@ -22,6 +31,7 @@ const TextField: React.FC<Props> = (props) => {
       variant='outlined'
       color='secondary'
       fullWidth
+      minRows={20}
     />
   )
 }

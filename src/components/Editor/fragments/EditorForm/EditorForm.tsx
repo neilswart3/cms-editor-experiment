@@ -1,3 +1,5 @@
+import { Button } from '@material-ui/core'
+import { Save } from '@material-ui/icons'
 import React, { useState } from 'react'
 import { TextField } from 'src/common'
 import Styled from './styles'
@@ -23,22 +25,42 @@ const EditorForm: React.FC<Props> = (props) => {
   const [values, setValues] = useState<Values>(initValues)
   const [errors, setErrors] = useState<Errors>(initErrors)
 
-  const handleSubmit = (e: any) => {
+  const handleSubmit = (e: any): void => {
     e.preventDefault()
+  }
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    const { name, value } = e.target
+
+    setValues((prev) => ({
+      ...prev,
+      [name]: value,
+    }))
   }
 
   return (
     <Styled.EditorForm onSubmit={handleSubmit}>
       <TextField
-        label='Text Field'
-        value=''
-        onChange={() => console.log('change')}
+        label='Title'
+        name='content'
+        value={values.title}
+        onChange={handleChange}
       />
       <TextField
-        label='Text Field'
-        value=''
-        onChange={() => console.log('change')}
+        label='Content'
+        name='content'
+        value={values.content}
+        onChange={handleChange}
+        multiline
       />
+      <Button
+        type='submit'
+        variant='contained'
+        size='large'
+        endIcon={<Save color='primary' />}
+      >
+        Submit
+      </Button>
     </Styled.EditorForm>
   )
 }

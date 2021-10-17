@@ -6,9 +6,7 @@ const darkTheme = (theme: ThemeOptions) =>
     ...theme,
     palette: {
       type: 'dark',
-      secondary: {
-        main: colors.white,
-      },
+      ...theme.palette,
     },
     overrides: {
       ...theme.overrides,
