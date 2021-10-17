@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { motion } from 'framer-motion'
 
-const GeneralLayout = styled.div`
+const GeneralLayoutTest = styled.div`
   /* background-color: #333;
   display: flex;
   min-height: 100vh;
@@ -17,6 +17,6 @@ const PageContent = styled(motion.div)`
   transform-style: preserve-3d; */
 `
 
-const Styled = { GeneralLayout, PageContent }
+const Styled = { GeneralLayoutTest, PageContent }
 
 export default Styled

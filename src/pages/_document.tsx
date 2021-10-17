@@ -28,8 +28,8 @@ class MyDocument extends Document {
       return {
         ...initialProps,
         styles: [
-          styledComponentSheet.getStyleElement(),
           materialUiSheets.getStyleElement(),
+          styledComponentSheet.getStyleElement(),
           initialProps.styles,
         ],
       }

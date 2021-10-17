@@ -1,14 +1,23 @@
+import React from 'react'
 import styled from 'styled-components'
 import { Fab as MuiFab } from '@material-ui/core'
+import { variants } from './animation'
+import { motion } from 'framer-motion'
 
 interface FabProps {
   open: boolean
+  component: React.ReactNode
 }
 
-const Fab = styled(MuiFab)<FabProps>`
+const Fab = styled(MuiFab).attrs(({ open }: FabProps) => ({
+  initial: 'closed',
+  variants: variants,
+  animate: open ? 'open' : 'closed',
+  component: motion.div,
+}))<FabProps>`
   position: absolute;
   bottom: 1rem;
-  right: 1rem;
+  left: 1rem;
   z-index: 100;
 
   ${({ open }) => `

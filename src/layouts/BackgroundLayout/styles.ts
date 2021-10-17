@@ -5,13 +5,19 @@ import { createLinearGradient } from 'src/app/lib'
 import styled, { keyframes } from 'styled-components'
 
 const BackgroundLayout = styled.div`
+  overflow: hidden;
+  position: relative;
+`
+
+const ContentWrapper = styled.div`
   display: flex;
+  flex: 1;
   justify-content: center;
   align-items: center;
-  height: 100vh;
-  padding: 5rem 3rem;
   position: relative;
-  overflow: hidden;
+  padding: 5rem 3rem;
+  height: 100vh;
+  width: 100%;
 `
 
 interface BackgroundGradientProps {
@@ -22,15 +28,15 @@ const backgroundAimation = keyframes`
   0% { 
     transform: scale(2) rotate(0)
   }
-
+  
   50% {
     transform: scale(3, 2.25) rotate(180deg) 
   }
-
+  
   100% {
     transform: scale(2) rotate(360deg)
   }
-`
+  `
 
 const BackgroundGradient = styled(motion.div)<BackgroundGradientProps>`
   ${({ palette }) => createLinearGradient({ palette, alpha: 0.5 })}
@@ -43,13 +49,6 @@ const BackgroundGradient = styled(motion.div)<BackgroundGradientProps>`
   animation: ${backgroundAimation} 60s ease-in-out infinite alternate;
 `
 
-const Content = styled(Paper)`
-  background-color: ${colors.white};
-  width: 100%;
-  height: 100%;
-  border-radius: 3.5rem;
-`
-
-const Styled = { BackgroundLayout, BackgroundGradient, Content }
+const Styled = { BackgroundLayout, BackgroundGradient, ContentWrapper }
 
 export default Styled

@@ -1,4 +1,5 @@
 import React from 'react'
+import { EditorLayout } from '..'
 import Styled from './styles'
 
 interface Props {
@@ -10,7 +11,9 @@ const BackgroundLayout: React.FC<Props> = ({ children, palette }) => {
   return (
     <Styled.BackgroundLayout>
       <Styled.BackgroundGradient palette={palette} />
-      {children}
+      <EditorLayout>
+        <Styled.ContentWrapper>{children}</Styled.ContentWrapper>
+      </EditorLayout>
     </Styled.BackgroundLayout>
   )
 }

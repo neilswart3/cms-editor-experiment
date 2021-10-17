@@ -1,24 +1,12 @@
 import { Theme, createTheme } from '@material-ui/core'
-import colors from './colors'
+import overrides from './overrides'
+import palette from './palette'
 import typography from './typography'
 
 const theme: Theme = createTheme({
-  palette: {
-    primary: {
-      main: '#fb8c00',
-    },
-    secondary: {
-      main: colors.white,
-    },
-  },
+  palette,
   typography,
-  overrides: {
-    MuiIconButton: {
-      root: {
-        color: colors.white,
-      },
-    },
-  },
+  overrides,
 })
 
 export default theme

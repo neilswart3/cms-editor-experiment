@@ -1,15 +1,23 @@
 import styled from 'styled-components'
-import { Drawer } from '@material-ui/core'
 import { motion } from 'framer-motion'
+import { colors } from 'src/app'
 
-const Editor = styled(motion.div)``
-
-interface BackgroundProps {
+interface EditorProps {
   open: boolean
 }
 
-const Background = styled(motion.div)<BackgroundProps>`
-  background-color: red;
+const Editor = styled(motion.div)`
+  position: relative;
+  height: 100vh;
+  z-index: 10;
+`
+
+const EditorContent = styled.div`
+  height: 100%;
+`
+
+const Background = styled(motion.div)<EditorProps>`
+  background-color: ${colors.orange};
   height: 100vh;
 
   ${({ open }) => `
@@ -18,6 +26,6 @@ const Background = styled(motion.div)<BackgroundProps>`
   `}
 `
 
-const Styled = { Editor, Background }
+const Styled = { Editor, Background, EditorContent }
 
 export default Styled

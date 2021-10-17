@@ -24,11 +24,11 @@ const Fab: React.FC<Props> = ({ open, setEditorOpen }: Props) => {
   return (
     <Styled.Fab
       open={open}
-      color='secondary'
+      color='primary'
       onClick={handleClick}
       aria-label={`${open ? 'close' : 'open'} editor`}
     >
-      {open ? <Close /> : <Edit />}
+      {open ? <Close color='secondary' /> : <Edit color='secondary' />}
     </Styled.Fab>
   )
 }

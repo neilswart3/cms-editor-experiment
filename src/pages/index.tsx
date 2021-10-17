@@ -13,7 +13,7 @@ const backgrounds = [
   'vk4vjTNVrTg',
 ]
 
-const background = backgrounds[4]
+const background = backgrounds[0]
 
 const Home: NextPage = () => {
   return (

@@ -12,6 +12,7 @@ const BackgroundLayout = styled.div`
   padding: 5rem 3rem;
   position: relative;
   overflow: hidden;
+  flex: 1;
 `
 
 interface BackgroundGradientProps {
