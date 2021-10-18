@@ -1,4 +1,4 @@
-import { initializeApp } from 'firebase/app'
+import { initializeApp, getApps } from 'firebase/app'
 import { getAuth } from 'firebase/auth'
 import { getFirestore } from 'firebase/firestore'
 import ReduxSagaFirebase from 'redux-saga-firebase'
@@ -12,10 +12,17 @@ const firebaseConfig = {
   appId: process.env.GOOGLE_APP_ID,
 }
 
-const app = initializeApp(firebaseConfig)
-const rsf = new ReduxSagaFirebase(app)
-const db = getFirestore(app)
-const auth = getAuth(app)
+let app
+let rsf
+let db
+let auth
+
+if (getApps().length === 0) {
+  app = initializeApp(firebaseConfig)
+  rsf = new ReduxSagaFirebase(app)
+  db = getFirestore(app)
+  auth = getAuth(app)
+}
 
 const firebase = {
   rsf,
