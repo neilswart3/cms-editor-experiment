@@ -1,5 +1,20 @@
 const circlePos = '2.75rem calc(100% - 2.75rem)'
 
+export const content = {
+  open: {
+    opacity: 1,
+    transition: {
+      delay: 0.75,
+    },
+  },
+  closed: {
+    opacity: 0,
+    transition: {
+      delay: 0,
+    },
+  },
+}
+
 export const editor = {
   open: {
     width: 300,

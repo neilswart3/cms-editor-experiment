@@ -4,7 +4,7 @@ import { compose } from 'redux'
 import { ThemeProvider } from '@material-ui/core'
 import { darkTheme } from 'src/app'
 import { RootState } from 'src/store/reducers'
-import { editor, sidebar } from './animations'
+import { content, editor, sidebar } from './animations'
 import { AuthFab, EditorForm, EditorHeader, Fab } from './fragments'
 import Styled from './styles'
 
@@ -27,7 +27,11 @@ const Editor: React.FC<Props> = ({ open, isSignedIn }) => {
           >
             <Styled.Background open={open} variants={sidebar}>
               <ThemeProvider theme={(theme) => darkTheme(theme)}>
-                <Styled.EditorContent>
+                <Styled.EditorContent
+                  initial='closed'
+                  animate={open ? 'open' : 'closed'}
+                  variants={content}
+                >
                   <EditorHeader />
                   <EditorForm />
                 </Styled.EditorContent>

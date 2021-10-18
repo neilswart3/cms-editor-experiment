@@ -31,7 +31,7 @@ const TextField: React.FC<Props> = (props) => {
       variant='outlined'
       color='secondary'
       fullWidth
-      minRows={20}
+      minRows={10}
     />
   )
 }
