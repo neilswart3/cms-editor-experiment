@@ -10,6 +10,8 @@ const Editor = styled(motion.div)`
   position: relative;
   height: 100vh;
   z-index: 10;
+  max-height: 100vh;
+  overflow-x: hidden;
 `
 
 const EditorContent = styled(motion.div)`
