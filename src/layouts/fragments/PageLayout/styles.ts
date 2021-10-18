@@ -7,7 +7,7 @@ const PageLayout = styled(Paper)`
   width: 100%;
   height: 100%;
   border-radius: 3.5rem;
-  max-width: 1440px;
+  max-width: 1700px;
 `
 
 const Styled = { PageLayout }

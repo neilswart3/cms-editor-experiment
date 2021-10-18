@@ -2,10 +2,18 @@ import styled from 'styled-components'
 import { rgba } from 'polished'
 import { colors } from 'src/app'
 import { PageLayout } from '../fragments'
+import { motion } from 'framer-motion'
 
 const GeneralLayout = styled(PageLayout)`
   position: relative;
   overflow: hidden;
+`
+const AnimationContainer = styled(motion.div)`
+  height: 100%;
+  width: 100%;
+  transform-style: preserve-3d;
+  perspective: 1000px;
+  max-width: 1700px;
 `
 
 const Background = styled.div`
@@ -66,6 +74,7 @@ const Image = styled.img`
 
 const Styled = {
   GeneralLayout,
+  AnimationContainer,
   Background,
   HeaderWrap,
   Content,

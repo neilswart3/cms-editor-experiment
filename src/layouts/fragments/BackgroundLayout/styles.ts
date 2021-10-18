@@ -21,26 +21,26 @@ interface BackgroundGradientProps {
 
 const backgroundAimation = keyframes`
   0% { 
-    transform: scale(2) rotate(0)
+    transform: translate(-50%, -50%) scale(2) rotate(0)
   }
 
   50% {
-    transform: scale(3, 2.25) rotate(180deg) 
+    transform: translate(-50%, -50%) scale(3, 2.25) rotate(180deg) 
   }
 
   100% {
-    transform: scale(2) rotate(360deg)
+    transform: translate(-50%, -50%) scale(2) rotate(360deg)
   }
 `
 
 const BackgroundGradient = styled(motion.div)<BackgroundGradientProps>`
   ${({ palette }) => createLinearGradient({ palette, alpha: 0.5 })}
   background-blend-mode: hue;
-  width: 100%;
-  height: 100%;
+  width: 300vw;
+  height: 500vh;
   position: absolute;
-  left: 0;
-  top: 0;
+  left: 50%;
+  top: 50%;
   animation: ${backgroundAimation} 60s ease-in-out infinite alternate;
 `
 

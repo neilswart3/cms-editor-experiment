@@ -8,9 +8,12 @@ import { Header } from 'src/components'
 import { RootState } from 'src/store/reducers'
 import * as actions from 'src/store/actions/palette'
 import Styled from './styles'
+import { motion } from 'framer-motion'
+import { animation } from './animation'
 
 interface ReduxStateProps {
   palette: string[]
+  open: boolean
 }
 
 interface ReduxDispatchProps {
@@ -31,6 +34,7 @@ const GeneralLayout: React.FC<Props> = ({
   palette,
   setPalette,
   page = 'page',
+  open,
 }) => {
   const backgroundImage = getImageUrl({
     id: background,
@@ -49,22 +53,29 @@ const GeneralLayout: React.FC<Props> = ({
 
   return (
     <BackgroundLayout palette={palette}>
-      <Styled.GeneralLayout>
-        <Styled.Background>
-          <Styled.Image src={backgroundImage} />
-        </Styled.Background>
-        <Styled.ContentWrap page={page}>
-          <Styled.ContentBackdrop />
-          <Styled.Content>{children}</Styled.Content>
-        </Styled.ContentWrap>
-        <Header />
-      </Styled.GeneralLayout>
+      <Styled.AnimationContainer
+        initial='close'
+        animate={open ? 'open' : 'close'}
+        variants={animation}
+      >
+        <Styled.GeneralLayout>
+          <Styled.Background>
+            <Styled.Image src={backgroundImage} />
+          </Styled.Background>
+          <Styled.ContentWrap page={page}>
+            <Styled.ContentBackdrop />
+            <Styled.Content>{children}</Styled.Content>
+          </Styled.ContentWrap>
+          <Header />
+        </Styled.GeneralLayout>
+      </Styled.AnimationContainer>
     </BackgroundLayout>
   )
 }
 
-const mapStateToProps = ({ palette }: RootState): ReduxStateProps => ({
+const mapStateToProps = ({ palette, nav }: RootState): ReduxStateProps => ({
   palette: palette.colors,
+  open: nav.open,
 })
 
 const mapDispatchToProps = (dispath: Dispatch): ReduxDispatchProps => ({

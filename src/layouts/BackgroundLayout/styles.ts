@@ -1,6 +1,4 @@
-import { Paper } from '@material-ui/core'
 import { motion } from 'framer-motion'
-import { colors } from 'src/app'
 import { createLinearGradient } from 'src/app/lib'
 import styled, { keyframes } from 'styled-components'
 
@@ -18,6 +16,7 @@ const ContentWrapper = styled.div`
   padding: 5rem 3rem;
   height: 100vh;
   width: 100%;
+  perspective: 90vw;
 `
 
 interface BackgroundGradientProps {
