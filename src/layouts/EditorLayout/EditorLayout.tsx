@@ -1,6 +1,6 @@
 import { useRouter } from 'next/dist/client/router'
 import React from 'react'
-import { Editor, Navigation } from 'src/components'
+import { Editor } from 'src/components'
 import Styled from './styles'
 
 interface Props {
@@ -15,7 +15,6 @@ const EditorLayout: React.FC<Props> = ({ children }) => {
     <Styled.EditorLayout>
       {!isAuth && <Editor />}
       {children}
-      <Navigation />
     </Styled.EditorLayout>
   )
 }

@@ -4,11 +4,10 @@ import { compose, Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { getImageUrl, getPalette } from 'src/app/lib'
 import { BackgroundLayout } from 'src/layouts'
-import { Header } from 'src/components'
+import { Header, Navigation } from 'src/components'
 import { RootState } from 'src/store/reducers'
 import * as actions from 'src/store/actions/palette'
 import Styled from './styles'
-import { motion } from 'framer-motion'
 import { animation } from './animation'
 
 interface ReduxStateProps {
@@ -36,6 +35,8 @@ const GeneralLayout: React.FC<Props> = ({
   page = 'page',
   open,
 }) => {
+  const backgroundColor =
+    palette[Math.floor(Math.random() * palette.length - 1)]
   const backgroundImage = getImageUrl({
     id: background,
   })
@@ -69,6 +70,7 @@ const GeneralLayout: React.FC<Props> = ({
           <Header />
         </Styled.GeneralLayout>
       </Styled.AnimationContainer>
+      <Navigation />
     </BackgroundLayout>
   )
 }

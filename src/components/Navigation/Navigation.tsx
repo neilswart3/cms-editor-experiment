@@ -2,38 +2,46 @@ import React from 'react'
 import { compose, Dispatch } from 'redux'
 import { connect } from 'react-redux'
 import { RootState } from 'src/store/reducers'
+import { NavContent, NavHeader, NavItem } from './fragments'
 import * as actions from 'src/store/actions/nav'
 import Styled from './styles'
-import MenuFab from 'src/common/MenuFab'
-import { Close } from '@material-ui/icons'
+import navItems from 'src/app/lib/navItems'
 
 interface ReduxStateProps {
   open: boolean
+  palette: string[]
 }
 
 interface ReduxDispatchProps {
-  setOpen: () => void
+  closeNav: () => void
 }
 
 type Props = ReduxStateProps & ReduxDispatchProps
 
-const Navigation: React.FC<Props> = ({ open, setOpen }) => {
+const Navigation: React.FC<Props> = ({ open, closeNav, palette }) => {
+  const backgroundColor =
+    palette[Math.floor(Math.random() * palette.length - 1)]
+
   return (
     <Styled.Navigation anchor='right' open={open}>
-      <MenuFab onClick={setOpen}>
-        <Close color='primary' />
-      </MenuFab>
-      Navigation component
+      <Styled.NavigationInner bgColor={backgroundColor}>
+        <NavHeader />
+        <NavContent>
+          {navItems.map(({ slug, name }) => (
+            <NavItem key={name} closeNav={closeNav} slug={slug} name={name} />
+          ))}
+        </NavContent>
+      </Styled.NavigationInner>
     </Styled.Navigation>
   )
 }
-
-const mapStateToProps = ({ nav }: RootState): ReduxStateProps => ({
-  open: nav.open,
+const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
+  closeNav: () => dispatch(actions.navOpen({ open: false })),
 })
 
-const mapDispatchToProps = (dispatch: Dispatch): ReduxDispatchProps => ({
-  setOpen: () => dispatch(actions.navOpen({ open: false })),
+const mapStateToProps = ({ nav, palette }: RootState): ReduxStateProps => ({
+  open: nav.open,
+  palette: palette.colors,
 })
 
 export default compose(connect(mapStateToProps, mapDispatchToProps))(Navigation)
