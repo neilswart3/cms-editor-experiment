@@ -7,8 +7,8 @@ import { BackgroundLayout } from 'src/layouts'
 import { Header, Navigation } from 'src/components'
 import { RootState } from 'src/store/reducers'
 import * as actions from 'src/store/actions/palette'
-import Styled from './styles'
 import { animation } from './animation'
+import Styled from './styles'
 
 interface ReduxStateProps {
   palette: string[]
