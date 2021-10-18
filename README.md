@@ -19,6 +19,6 @@ A little proof of concept for a travel blog hooked up with a cms
 
 # ScreenShots
 
-<img src="/logged-out.png" alt="logged out" title="Logged Out">
-<img src="/landing-logged-in.png" alt="logged in" title="Logged In">
-<img src="/landing-editor-open.png" alt="editor open" title="Editor Open">
+![landing-logged-in](https://user-images.githubusercontent.com/27015528/137649091-12a27f12-aa70-4cf4-b156-dc7e330829d1.png)
+![landing-editor-open](https://user-images.githubusercontent.com/27015528/137649093-fd669bd1-218c-4bf9-8925-e68bda6c5d52.png)
+![logged-out](https://user-images.githubusercontent.com/27015528/137649094-de5e00d7-034e-44fa-9f53-7e66d6dee770.png)
