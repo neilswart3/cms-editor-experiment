@@ -1,8 +1,8 @@
-import { collection, getDocs } from 'firebase/firestore'
+import { collection, getDocs, Firestore } from 'firebase/firestore'
 import { firebase } from '..'
 
 const getPages = async () => {
-  const data = await getDocs(collection(firebase.db, 'pages'))
+  const data = await getDocs(collection(firebase.db as Firestore, 'pages'))
     .then((docs) => {
       let pages = {}
       docs.forEach((doc) => {
