@@ -36,7 +36,7 @@ const Home: NextPage<Props> = ({ data, loading, error, getPages, image }) => {
   }, [data])
 
   return (
-    <HomeLayout background={image}>
+    <HomeLayout background={sections.image ? sections.image.src : image}>
       {error && (
         <Alert severity='error'>
           <AlertTitle>Error</AlertTitle>

@@ -1,4 +1,4 @@
-import { doc, updateDoc } from 'firebase/firestore'
+import { doc, updateDoc, Firestore } from 'firebase/firestore'
 import { Page } from 'src/store/actions/pages/types'
 import { firebase } from '..'
 
@@ -8,7 +8,7 @@ type Args = {
 }
 
 const updatePage = async ({ page, values }: Args) => {
-  const pageRef = doc(firebase.db, 'pages', page)
+  const pageRef = doc(firebase.db as Firestore, 'pages', page)
 
   const data = await updateDoc(pageRef, { data: { ...values } })
     .then(() => {

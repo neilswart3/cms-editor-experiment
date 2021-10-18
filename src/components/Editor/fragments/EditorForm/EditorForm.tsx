@@ -10,10 +10,12 @@ import { RootState } from 'src/store/reducers'
 import { TextField } from 'src/common'
 import Styled from './styles'
 import { backgrounds } from 'src/app/lib'
+import { getImage } from './helpers'
 
 const initValues = {
   title: '',
   content: '',
+  image: { ...backgrounds[0] },
 }
 
 const initErrors = {
@@ -37,14 +39,15 @@ interface ReduxDispatchProps {
 type Props = ReduxStateProps & ReduxDispatchProps
 
 type Values = {
-  [key in keyof typeof initValues]: string
+  title: string
+  content: string
+  image: Image
 }
 
 type Errors = Values
 
 const EditorForm: React.FC<Props> = ({ page, updatePage, updateImage }) => {
   const [values, setValues] = useState<Values>(initValues)
-  const [image, setImage] = useState<Image>({ ...backgrounds[0] })
   const [errors, setErrors] = useState<Errors>(initErrors)
 
   const handleSubmit = (e: any): void => {
@@ -53,22 +56,13 @@ const EditorForm: React.FC<Props> = ({ page, updatePage, updateImage }) => {
     updatePage({ page: 'landing', values })
   }
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+  const handleChange = (e: any): void => {
     const { name, value } = e.target
 
     setValues((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: name === 'image' ? getImage(value, backgrounds) : value,
     }))
-  }
-
-  const handleImageChange = (e: any) => {
-    const { value } = e.target
-
-    const [filteredImg] = backgrounds.filter((img) => value === img.src)
-
-    setImage(filteredImg)
-    updateImage(filteredImg)
   }
 
   useEffect(() => {
@@ -93,14 +87,13 @@ const EditorForm: React.FC<Props> = ({ page, updatePage, updateImage }) => {
         multiline
       />
       <Select
+        name='image'
         variant='outlined'
-        defaultValue={image.src}
-        value={image.src}
-        onChange={handleImageChange}
+        defaultValue={values.image.src}
+        value={values.image.src}
+        onChange={handleChange}
       >
         {backgrounds.map((img) => {
-          console.log('img:', img)
-
           return (
             <MenuItem value={img.src} key={img.src}>
               {img.name}

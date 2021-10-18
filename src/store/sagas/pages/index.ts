@@ -35,7 +35,10 @@ function* updatePages({ payload }: any) {
   const { page, values } = payload
 
   try {
-    const data: ResponseGenerator = yield call(updatePage, { page, values })
+    const data: ResponseGenerator = yield call(updatePage, {
+      page,
+      values,
+    })
 
     if (data.pages) {
       console.log('data:', data)

@@ -1,6 +1,12 @@
+export type Image = {
+  src: string
+  name: string
+}
+
 export type Page = {
   title?: string
   content?: string
+  image?: Image
 }
 
 export type Pages = {
